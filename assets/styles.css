@@ -1,0 +1,105 @@
+body{
+            background-color: #e9e9e9;
+
+        }
+    .patient-link {
+        color: inherit;          /* same as normal text */
+        text-decoration: underline;
+    }
+
+    .patient-link:hover {
+        color: inherit;
+        text-decoration: underline;
+        opacity: 0.8;            /* subtle hover cue */
+    }
+
+    .patient-link:visited {
+        color: inherit;
+    }
+
+    /* Pagination: black & white theme */
+    .pagination .page-link {
+        color: #000;
+        background-color: #fff;
+        border-color: #dee2e6;
+    }
+
+    .pagination .page-link:hover {
+        color: #000;
+        background-color: #f1f1f1;
+    }
+
+    .pagination .page-item.active .page-link {
+        color: #fff;
+        background-color: #000;
+        border-color: #000;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        color: #6c757d;
+        background-color: #fff;
+    }
+
+
+    /* Page centering */
+.form-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 65vh;
+}
+
+/* Card */
+.form-card {
+    background: #fff;
+    padding: 32px;
+    width: 100%;
+    max-width: 720px;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px #e5e5e5;
+}
+
+/* Login card narrower */
+.login-card {
+    max-width: 420px;
+}
+
+/* Title */
+.form-title {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* Login inputs */
+.login-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.login-group label {
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.login-group input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Actions */
+.form-actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: #111;
+    color: #fff;
+    padding: 10px 26px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}

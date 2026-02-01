@@ -3,7 +3,7 @@ require_once '../config/db.php';
 require_once '../includes/header.php';
 require_once '../helpers/validation.php';
 require_once '../helpers/auth.php';
-requireAdmin();
+requireAdmin(); // ensure only logged-in admins can access 
 
 $errors = [];
 $isEdit = isset($_GET['id']) && is_numeric($_GET['id']);
@@ -21,7 +21,7 @@ if ($isEdit) {
 
     
 }
-// handle update here
+// runs after form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name     = trim($_POST['name'] ?? '');
@@ -30,14 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone    = trim($_POST['phone'] ?? '');
     $address  = trim($_POST['address'] ?? '');
 
-    // 🔵 Validation via helper
+    // field validations with helpers
     $errors = validatePatient($_POST);
 
-    // 🔵 Only proceed if no errors
+    // if no errors then update or insert
     if (empty($errors)) {
-
+        // this ensures it is an update with invisible patient_id field
         if (isset($_POST['patient_id']) && is_numeric($_POST['patient_id'])) {
-            // UPDATE
+            // simple UPDATE query 
             $sql = "
                 UPDATE patients
                 SET
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
 
         } else {
-            // INSERT
+            // else insert new patient
             $sql = "
                 INSERT INTO patients (name, dob, join_date, phone, address)
                 VALUES (:name, :dob, :join_date, :phone, :address)

@@ -1,10 +1,13 @@
 <?php
 require_once '../config/db.php';
 require_once '../includes/header.php';
+include_once '../helpers/auth.php';
+requireAdmin();
 $perPage = 5;
 $page = isset($_GET['page']) && (int)$_GET['page'] > 0 ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $perPage;
-
+/* main query to get id, name, age, total visits, last visit, days since last visit, next follow up
+and filters with follow up due status */
 $summary = $pdo->query("
     SELECT
         p.patient_id,
@@ -64,6 +67,11 @@ $totalPages = (int)ceil($totalRows / $perPage);
         <a href="birthdays.php"
            class="btn btn-sm <?= basename($_SERVER['PHP_SELF']) === 'birthdays.php' ? 'btn-dark' : 'btn-outline-secondary' ?>">
             Birthdays
+        </a>
+
+        <a href="charts.php"
+           class="btn btn-sm <?= basename($_SERVER['PHP_SELF']) === 'charts.php' ? 'btn-dark' : 'btn-outline-secondary' ?>">
+            Charts
         </a>
     </div>
 </div>

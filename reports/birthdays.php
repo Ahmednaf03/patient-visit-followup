@@ -2,6 +2,8 @@
 require_once '../config/db.php';
 require_once '../includes/header.php';
 
+/* main query to get patients name, dob, birthday this year
+,days remaining, and filters with birthday in next 30 days */
 $birthdays = $pdo->query("
     SELECT
         p.name,
@@ -49,6 +51,10 @@ $birthdays = $pdo->query("
         <a href="birthdays.php"
            class="btn btn-sm <?= basename($_SERVER['PHP_SELF']) === 'birthdays.php' ? 'btn-dark' : 'btn-outline-secondary' ?>">
             Birthdays
+        </a>
+                <a href="charts.php"
+           class="btn btn-sm <?= basename($_SERVER['PHP_SELF']) === 'charts.php' ? 'btn-dark' : 'btn-outline-secondary' ?>">
+            Charts
         </a>
     </div>
 </div>

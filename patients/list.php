@@ -2,24 +2,28 @@
 require_once '../config/db.php';
 require_once '../includes/header.php';
 require_once '../helpers/auth.php';
+requireAdmin();
+// search params and pagination
 $search = isset($_GET['q']) ? trim($_GET['q']) : '';
 $searchParam = "%$search%";
 $limit = 5; // records per page
 
+// determine current page
 $page = isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0
     ? (int) $_GET['page']
     : 1;
-
+// calculate offset for pagination
 $offset = ($page - 1) * $limit;
 
 $whereSql = '';
 $params = [];
 
+// add search condition if search term is provided
 if ($search !== '') {
     $whereSql = 'WHERE p.name LIKE :search';
     $params['search'] = "%$search%";
 }
-
+// count total patients for pagination
 $countSql = "
     SELECT COUNT(*) AS total
     FROM patients p
@@ -28,6 +32,7 @@ $countSql = "
 
 $countStmt = $pdo->prepare($countSql);
 
+// bind search parameter if applicable
 foreach ($params as $key => $value) {
     $countStmt->bindValue(":$key", $value);
 }
@@ -37,6 +42,9 @@ $countStmt->execute();
 
 $totalPatients = (int) $countStmt->fetchColumn();
 $totalPages = ceil($totalPatients / $limit);
+/* main query to get id name age in years and months
+ join date and total visit count
+*/
 $sql = "
 SELECT
     p.patient_id,
@@ -61,6 +69,7 @@ ORDER BY p.name
 LIMIT :limit OFFSET :offset;";
 
 $stmt = $pdo->prepare($sql);
+// bind search parameter if applicable
 foreach ($params as $key => $value) {
     $stmt->bindValue(":$key", $value); // learn me better
 } 

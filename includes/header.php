@@ -27,13 +27,19 @@ require_once '../helpers/auth.php';
     <div class="navbar-nav">
 
         <!-- Admin Login / Logout (FIRST) -->
-        <?php if (isAdmin()): ?>
-            <a class="nav-link" href="../includes/logout.php">
-                Logout (<?= htmlspecialchars($_SESSION['admin_name']) ?>)
-            </a>
-        <?php else: ?>
-            <a class="nav-link" href="../includes/login.php">Admin Login</a>
-        <?php endif; ?>
+<?php if (!isLoggedIn()): ?>
+
+    <a class="nav-link" href="../includes/login.php">Login</a>
+
+<?php else: ?>
+
+    <a class="nav-link" href="../includes/logout.php">
+        Logout (<?= htmlspecialchars($_SESSION['auth']['role']) ?>)
+    </a>
+
+<?php endif; ?>
+
+
 
         <a class="nav-link" href="../patients/list.php">Patients</a>
 

@@ -7,7 +7,8 @@ $patientId = $_GET['id'] ?? null;
 if (!$patientId) {
     die('Patient ID missing');
 }
-
+/* main query to get patient 
+id, name, age, last visit date, days since last visit, next follow up */
 $sql = "
 SELECT
     p.patient_id,

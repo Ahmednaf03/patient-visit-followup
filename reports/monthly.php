@@ -56,6 +56,10 @@ $totalPages = ceil($totalRows / $perPage);
            class="btn btn-sm <?= basename($_SERVER['PHP_SELF']) === 'birthdays.php' ? 'btn-dark' : 'btn-outline-secondary' ?>">
             Birthdays
         </a>
+                <a href="charts.php"
+           class="btn btn-sm <?= basename($_SERVER['PHP_SELF']) === 'charts.php' ? 'btn-dark' : 'btn-outline-secondary' ?>">
+            Charts
+        </a>
     </div>
 </div>
 

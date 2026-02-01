@@ -1,6 +1,9 @@
 <?php
 require_once '../config/db.php';
 require_once '../includes/header.php';
+
+/* query to get name, visit date, follow up due 
+and filters with follow up due in next 7 days */
 $upcomingquery = " SELECT
     p.name,
     v.visit_date,
@@ -10,6 +13,8 @@ JOIN patients p ON p.patient_id = v.patient_id
 WHERE v.follow_up_due BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)
 ORDER BY v.follow_up_due;";
 
+/* query to get name, visit date, follow up due and
+filters with follow up due overdue checks if visit happended after due date */
 $overduequery = "SELECT
     p.name,
     v.visit_date,
@@ -24,7 +29,7 @@ AND NOT EXISTS (
       AND v2.visit_date > v.follow_up_due
 )
 ORDER BY v.follow_up_due;";
-
+/* same as overdue query but with 7 day grace period */
 $missedquery = " SELECT
     p.name,
     v.visit_date,
@@ -66,6 +71,10 @@ $missed   = $pdo->query($missedquery)->fetchAll();
         <a href="birthdays.php"
            class="btn btn-sm <?= basename($_SERVER['PHP_SELF']) === 'birthdays.php' ? 'btn-dark' : 'btn-outline-secondary' ?>">
             Birthdays
+        </a>
+          <a href="charts.php"
+           class="btn btn-sm <?= basename($_SERVER['PHP_SELF']) === 'charts.php' ? 'btn-dark' : 'btn-outline-secondary' ?>">
+            Charts
         </a>
     </div>
 </div>

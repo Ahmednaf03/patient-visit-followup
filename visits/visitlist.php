@@ -1,7 +1,10 @@
 <?php
 require_once '../config/db.php';
 require_once '../includes/header.php';
-
+include_once '../helpers/auth.php';
+requireAdmin();
+/* main query to get visit id, visit date, consultation fee, lab fee, 
+follow up due, patient id, patient name */
 $sql = "
 SELECT
     v.visit_id,

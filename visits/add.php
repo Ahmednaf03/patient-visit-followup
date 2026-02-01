@@ -13,7 +13,7 @@ $patients = $pdo->query("
     FROM patients
     ORDER BY name
 ")->fetchAll();
-
+// runs after form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $patientId  = $_POST['patient_id'] ?? '';
@@ -21,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $consultFee = $_POST['consultation_fee'] ?? '';
     $labFee     = $_POST['lab_fee'] ?? '';
 
-    // 🔵 Validation via helper
+    // Validation via helper
     $errors = validateVisit($_POST);
 
-    // 🔵 Proceed only if validation passes
+    // If no errors, insert visit
     if (empty($errors)) {
 
         $sql = "

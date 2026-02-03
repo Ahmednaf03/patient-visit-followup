@@ -28,6 +28,6 @@ function requireAdmin() {
     requireLogin();
     if (!isAdmin()) {
         http_response_code(403);
-        exit('Forbidden, admin access only go back <a href="/patient-visit-followup/index.php">Home</a>');
+        exit('Forbidden, admin access only go back <a href="/patient-visit-followup/index.php" >Home</a>');
     }
 }

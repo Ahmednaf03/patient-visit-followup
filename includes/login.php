@@ -51,6 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input class="form-control mb-3" type="password" name="password" placeholder="Password" required>
 
         <button class="btn btn-dark w-100">Login</button>
+        <div class="d-flex justify-content-end mt-2">
+          <a href="register.php" class="text-dark fw-medium">Register</a>
+        </div>
+
     </form>
 </div>
 

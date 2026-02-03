@@ -46,5 +46,6 @@ if (!$patient) {
     <li class="list-group-item"><strong>Next Follow-up:</strong> <?= $patient['next_follow_up'] ?? 'N/A' ?></li>
     <li class="list-group-item"><strong>Follow-up Overdue:</strong> <?= $patient['follow_up_overdue'] ?></li>
 </ul>
-
+<br>
+<a href="../visits/patient_visits.php?patient_id=<?= $patient['patient_id'] ?>" class="btn btn-primary">View Visits</a>
 <?php require_once '../includes/footer.php'; ?>

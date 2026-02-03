@@ -26,11 +26,11 @@ require_once '../helpers/auth.php';
 
     <div class="navbar-nav">
 
-        <!-- Admin Login / Logout (FIRST) -->
+    <!-- if not logged in show login -->
 <?php if (!isLoggedIn()): ?>
 
     <a class="nav-link" href="../includes/login.php">Login</a>
-
+<!-- if logged in show logout with correct role -->
 <?php else: ?>
 
     <a class="nav-link" href="../includes/logout.php">

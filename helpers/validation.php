@@ -1,7 +1,6 @@
 <?php
 
-function validatePatient(array $data): array
-{
+function validatePatient(array $data): array{
     $errors = [];
 
     // Name
@@ -49,8 +48,7 @@ function validatePatient(array $data): array
     return $errors;
 }
 
-function validateVisit(array $data): array
-{
+function validateVisit(array $data): array{
     $errors = [];
 
     // Patient
@@ -85,6 +83,46 @@ function validateVisit(array $data): array
     return $errors;
 }
 
+function validateUser(array $data): array{
+    $errors = [];
+
+    // Name    
+    $name = trim($data['name'] ?? '');
+    if ($name === '') {
+        $errors[] = 'Name is required.';
+    } elseif (strlen($name) < 3) {
+        $errors[] = 'Name must be at least 3 characters long.';
+    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $name)) {
+        $errors[] = 'Name can only contain letters and spaces.';
+    }
+    // DOB
+    $dob = $data['dob'] ?? '';
+    if ($dob === '') {
+        $errors[] = 'Date of birth is required.';
+    } elseif (!validateDate($dob)) {
+        $errors[] = 'Date of birth is invalid.';
+    } elseif ($dob > date('Y-m-d')) {
+        $errors[] = 'Date of birth cannot be in the future.';
+    }
+
+    // Email
+    $email = trim($data['email'] ?? '');
+    if ($email === '') {
+        $errors[] = 'Email is required.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'invalid Email Format.';
+    }
+
+    // Password
+    $password = trim($data['password'] ?? '');
+    if ($password === '') {
+        $errors[] = 'Password is required.';
+    } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[^\s]{8,}$/', $password)) {
+    $errors[] = 'Password must be at least 8 characters and include uppercase, lowercase, number, and special character.';
+}
+
+    return $errors;
+}
 
 function validateDate(string $date): bool
 {
